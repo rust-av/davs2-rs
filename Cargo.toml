@@ -9,6 +9,7 @@ license = "MIT"
 
 [dependencies]
 davs2-sys = { path = "davs2-sys" }
+paste = "0.1"
 
 [workspace]
 members = ["davs2-sys"]
