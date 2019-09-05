@@ -1,0 +1,31 @@
+name: davs2
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install nasm
+      run: |
+        sudo apt-get install nasm
+    - name: Install davs2
+      run: |
+        git clone --depth 1 https://github.com/pkuvcl/davs2
+        cd davs2/build/linux
+        ./configure --enable-pic --prefix=$HOME/davs2_dir
+        make
+        make install
+    - name: Run tests
+      run: |
+        export PKG_CONFIG_PATH=$HOME/davs2_dir/lib/pkgconfig:$PKG_CONFIG_PATH
+        cargo test --all-features
