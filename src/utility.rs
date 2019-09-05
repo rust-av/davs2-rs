@@ -64,3 +64,14 @@ macro_rules! set_and_get_params {
             }
        }
 }
+
+#[macro_export]
+macro_rules! get_mut_ptr {
+    ($struct:tt, $param:tt, $type:ty) => {
+        impl $struct {
+            pub(crate) fn get_mut_ptr(&mut self) -> *mut $type {
+                &mut self.$param
+            }
+        }
+    };
+}

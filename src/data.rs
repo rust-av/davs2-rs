@@ -61,6 +61,8 @@ create_struct!(
     )
 );
 
+get_mut_ptr!(SeqInfo, seq_info, davs2_seq_info_t);
+
 default_struct!(
     Picture,
     picture,
@@ -127,6 +129,8 @@ set_and_get_params!(
     )
 );
 
+get_mut_ptr!(Picture, picture, davs2_picture_t);
+
 impl Picture {
     pub fn planes(&self, plane: usize) -> &mut [u8] {
         check_plane!(plane);
@@ -182,6 +186,8 @@ impl Packet {
     }
 }
 
+get_mut_ptr!(Packet, packet, davs2_packet_t);
+
 pub struct Param {
     param: davs2_param_t,
 }
@@ -202,3 +208,5 @@ impl Param {
         Self { param }
     }
 }
+
+get_mut_ptr!(Param, param, davs2_param_t);
